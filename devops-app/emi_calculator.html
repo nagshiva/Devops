@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator</title>
+    <script>
+        function calculateEMI() {
+            // Get input values
+            var principal = parseFloat(document.getElementById("principal").value);
+            var interestRate = parseFloat(document.getElementById("interestRate").value) / 100 / 12; // Monthly interest rate
+            var term = parseInt(document.getElementById("term").value) * 12; // Convert years to months
+
+            // Calculate EMI
+            var emi = (principal * interestRate * Math.pow(1 + interestRate, term)) / (Math.pow(1 + interestRate, term) - 1);
+            
+            // Display the result
+            document.getElementById("result").innerHTML = "Your EMI is: " + emi.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <h2>EMI Calculator</h2>
+    <form onsubmit="event.preventDefault(); calculateEMI();">
+        <div>
+            <label for="principal">Loan Amount:</label>
+            <input type="number" id="principal" name="principal" required>
+        </div>
+        <div>
+            <label for="interestRate">Annual Interest Rate (%):</label>
+            <input type="number" id="interestRate" name="interestRate" step="0.01" required>
+        </div>
+        <div>
+            <label for="term">Loan Term (years):</label>
+            <input type="number" id="term" name="term" required>
+        </div>
+        <button type="submit">Calculate EMI</button>
+    </form>
+    <p id="result"></p>
+    <p><a href="index.html">Back to Home</a></p>
+</body>
+</html>
